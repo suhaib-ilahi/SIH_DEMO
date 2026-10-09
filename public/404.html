@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentinel | Redirecting</title>
+  </head>
+  <body>
+    <script>
+      (function () {
+        var path = window.location.pathname;
+        var base = path.indexOf("/SIH_DEMO/") === 0 ? "/SIH_DEMO" : "";
+        var appPath = path.slice(base.length) || "/";
+        var target = base + "/?p=" + encodeURIComponent(appPath + window.location.search + window.location.hash);
+        window.location.replace(target);
+      })();
+    </script>
+  </body>
+</html>
