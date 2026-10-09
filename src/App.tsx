@@ -374,7 +374,7 @@ function Overview({
       .filter((item) => selectedCaseIds.has(item.caseId))
       .map((item) => ({
         id: item.id,
-        title: "New synthetic complaint received",
+        title: "New demo complaint received",
         detail: `${item.reference} · ${item.category}`,
         date: item.createdAt,
         target: item.caseId,
@@ -446,7 +446,7 @@ function Overview({
     <>
       <Header title="Overview dashboard" eyebrow="COMMAND CENTRE" />
       <div className="demo-banner">
-        <span className="live-dot" /> Synthetic Data Demo · Scores, predictions,
+        <span className="live-dot" /> Demo Environment · Scores, predictions,
         alerts, and outcomes are simulated for authorised workflow testing.
       </div>
       <div className="dashboard-filters">
@@ -549,7 +549,7 @@ function Overview({
         {metric(
           "Early warnings requiring review",
           String(warnings.filter((item) => item.status === "New").length),
-          "New synthetic signals",
+          "New demo signals",
           "purple",
           () => setPage("Suo-motu"),
         )}
@@ -917,7 +917,7 @@ function Overview({
           </div>
           <div className="status-line">
             <span className="live-dot" />
-            Synthetic records only · no live system connection
+            Demo records only · no live system connection
           </div>
         </Section>
       </div>
@@ -995,7 +995,7 @@ function Cases({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "synthetic-case-view.csv";
+    a.download = "demo-case-view.csv";
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -1003,7 +1003,7 @@ function Cases({
     <>
       <Header title="Case management" eyebrow="OPERATIONS" />
       <div className="case-disclaimer">
-        <span className="live-dot" /> Synthetic case records · export contains
+        <span className="live-dot" /> Demo case records · export contains
         demo data only.
       </div>
       <div className="case-toolbar">
@@ -1187,7 +1187,7 @@ function Predictive({
       : [];
     const exposure = transactions.reduce((sum, item) => sum + item.amount, 0);
     const state =
-      complaint?.location.split(",")[1]?.trim() || "Synthetic region";
+      complaint?.location.split(",")[1]?.trim() || "Demo region";
     const factors = [
       transactions.length
         ? `${transactions.length} linked transaction event${transactions.length > 1 ? "s" : ""} observed`
@@ -1415,7 +1415,7 @@ function Predictive({
         <Metric
           label="Cases with predictions"
           value={String(activePredictions.size)}
-          note="Linked synthetic prediction records"
+          note="Linked demo prediction records"
           accent="blue"
         />
         <Metric
@@ -1478,7 +1478,7 @@ function Predictive({
         <div>
           <strong>Run a demo analysis</strong>
           <small>
-            Use an existing synthetic case to produce a deterministic result.
+            Use an existing demo case to produce a deterministic result.
           </small>
         </div>
         <button
@@ -1748,7 +1748,7 @@ function Predictive({
               </button>
             </div>
             <label className="workflow-label">
-              Existing synthetic case
+              Existing demo case
               <select
                 value={workflowCase}
                 onChange={(event) => setWorkflowCase(event.target.value)}
@@ -1801,7 +1801,7 @@ function Predictive({
                 </ul>
                 {workflowMissing.length > 0 && (
                   <div className="insufficient">
-                    <strong>Insufficient synthetic data</strong>
+                    <strong>Insufficient demo data</strong>
                     <span>{workflowMissing.join(" · ")}</span>
                     <small>
                       The demo will not invent certainty. Confidence would be
@@ -1922,7 +1922,7 @@ function Heatmap({
       (item) => item.caseId === linkedCase?.id,
     );
     const state =
-      complaint?.location.split(",")[1]?.trim() || "Synthetic region";
+      complaint?.location.split(",")[1]?.trim() || "Demo region";
     const city = complaint?.location.split(",")[0] || candidate.location;
     return { candidate, prediction, linkedCase, complaint, state, city };
   });
@@ -2006,7 +2006,7 @@ function Heatmap({
     <>
       <Header title="GIS risk heatmap" eyebrow="GEOSPATIAL INTELLIGENCE" />
       <div className="demo-banner">
-        <span className="live-dot" /> Synthetic coordinates and risk overlays ·
+        <span className="live-dot" /> Demo coordinates and risk overlays ·
         This map is a frontend demonstration, not a live operational feed.
       </div>
       <div className="gis-toolbar">
@@ -2087,7 +2087,7 @@ function Heatmap({
         <Metric
           label="Candidate locations"
           value={String(filtered.length)}
-          note="Filtered synthetic locations"
+          note="Filtered demo locations"
           accent="blue"
         />
         <Metric
@@ -2222,7 +2222,7 @@ function Heatmap({
                     <Popup>
                       <strong>ATM · {item.candidate.location}</strong>
                       <br />
-                      Synthetic facility location
+                      Demo facility location
                     </Popup>
                   </CircleMarker>
                 ))}
@@ -2247,7 +2247,7 @@ function Heatmap({
                     <Popup>
                       <strong>Branch · {item.candidate.location}</strong>
                       <br />
-                      Synthetic facility location
+                      Demo facility location
                     </Popup>
                   </CircleMarker>
                 ))}
@@ -2305,7 +2305,7 @@ function Heatmap({
                       <strong>Active case location</strong>
                       <br />
                       {item.linkedCase?.reference} · privacy-preserving
-                      synthetic point
+                      demo point
                     </Popup>
                   </CircleMarker>
                 ))}
@@ -2356,14 +2356,14 @@ function Heatmap({
                     <Popup>
                       <strong>Recorded intervention outcome</strong>
                       <br />
-                      Synthetic completed response
+                      Demo completed response
                     </Popup>
                   </CircleMarker>
                 ))}
           </MapContainer>
           {tileError && (
             <div className="map-tile-fallback">
-              Map tiles could not be loaded. Synthetic coordinates and map
+              Map tiles could not be loaded. Demo coordinates and map
               overlays remain available.
             </div>
           )}
@@ -2724,7 +2724,7 @@ function Workspace({
       }),
     );
   };
-  const addSyntheticEvidence = () => {
+  const addDemoEvidence = () => {
     if (!evidenceName.trim()) return;
     setData(
       addAudit(
@@ -2734,7 +2734,7 @@ function Workspace({
           type: evidenceType,
           size: "Demo metadata",
           verified: false,
-          description: "Synthetic evidence entry",
+          description: "Demo evidence entry",
           sourceReference: "Demo source reference",
           provenance: "Entered by authorised demo user",
           integrityStatus: "Demo metadata only",
@@ -2752,12 +2752,12 @@ function Workspace({
     setEvidenceName("");
   };
   const dossier = () => {
-    const text = `SYNTHETIC CASE DOSSIER\n${c.reference} · ${c.title}\nComplaint: ${complaint?.reference || "Unknown"} | ${complaint?.category || "Unknown"} | ${money(complaint?.amount || 0)} | ${complaint?.location || "Unknown"}\nStatus: ${c.status} | Assignee: ${c.assignee}\n\nTRANSACTIONS\n${tx.map((item) => `${item.id} ${item.createdAt} ${item.fromAccountId}->${item.toAccountId} ${money(item.amount)} ${item.channel}`).join("\n")}\n\nPREDICTIONS\n${predictions.map((item) => `${item.id} ${item.window} confidence ${item.confidence} ${item.rationale}`).join("\n")}\n\nINTERVENTIONS\n${interventions.map((item) => `${item.id} ${item.status} ${item.action}`).join("\n")}\n\nNOTES\n${notes.map((item) => `${item.id} ${item.author} ${item.text}`).join("\n")}\n\nEVIDENCE\n${evidence.map((item) => `${item.id} ${item.name} ${item.type} ${item.integrityStatus || "Demo metadata only"}`).join("\n")}`;
+    const text = `DEMO CASE DOSSIER\n${c.reference} · ${c.title}\nComplaint: ${complaint?.reference || "Unknown"} | ${complaint?.category || "Unknown"} | ${money(complaint?.amount || 0)} | ${complaint?.location || "Unknown"}\nStatus: ${c.status} | Assignee: ${c.assignee}\n\nTRANSACTIONS\n${tx.map((item) => `${item.id} ${item.createdAt} ${item.fromAccountId}->${item.toAccountId} ${money(item.amount)} ${item.channel}`).join("\n")}\n\nPREDICTIONS\n${predictions.map((item) => `${item.id} ${item.window} confidence ${item.confidence} ${item.rationale}`).join("\n")}\n\nINTERVENTIONS\n${interventions.map((item) => `${item.id} ${item.status} ${item.action}`).join("\n")}\n\nNOTES\n${notes.map((item) => `${item.id} ${item.author} ${item.text}`).join("\n")}\n\nEVIDENCE\n${evidence.map((item) => `${item.id} ${item.name} ${item.type} ${item.integrityStatus || "Demo metadata only"}`).join("\n")}`;
     const blob = new Blob([text], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${c.reference}-synthetic-dossier.txt`;
+    a.download = `${c.reference}-demo-dossier.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -2765,7 +2765,7 @@ function Workspace({
     <>
       <Header title="Investigation workspace" eyebrow={c.reference} />
       <div className="demo-banner">
-        <span className="live-dot" /> Connected synthetic case context · All
+        <span className="live-dot" /> Connected demo case context · All
         linked records below refer to {c.reference}.
       </div>
       <div className="workspace-head">
@@ -2880,7 +2880,7 @@ function Workspace({
             <div className="case-callout">
               <strong>Source references</strong>
               <span>
-                {complaint?.reference || "No source reference"} · Synthetic
+                {complaint?.reference || "No source reference"} · Demo
                 complaint record · Observed status
               </span>
             </div>
@@ -2962,7 +2962,7 @@ function Workspace({
               <strong>Selected transaction</strong>
               <span>
                 {tx.find((item) => item.id === selectedTxn)?.id} ·
-                source/destination references are synthetic and role-safe.
+                source/destination references are demo and role-safe.
               </span>
             </div>
           )}
@@ -2977,7 +2977,7 @@ function Workspace({
               <tr>
                 <th>Account</th>
                 <th>Institution</th>
-                <th>Synthetic role</th>
+                <th>Demo role</th>
                 <th>Risk</th>
                 <th>Relationship evidence</th>
               </tr>
@@ -2992,7 +2992,7 @@ function Workspace({
                   <td>{account.bank}</td>
                   <td>
                     <Badge>{account.type}</Badge>
-                    <small>Clearly labelled synthetic relationship</small>
+                    <small>Clearly labelled demo relationship</small>
                   </td>
                   <td>
                     <Badge tone={account.riskScore >= 85 ? "red" : "orange"}>
@@ -3196,7 +3196,7 @@ function Workspace({
                 </div>
               ))}
               <input
-                placeholder="Synthetic evidence title…"
+                placeholder="Demo evidence title…"
                 value={evidenceName}
                 onChange={(e) => setEvidenceName(e.target.value)}
               />
@@ -3209,7 +3209,7 @@ function Workspace({
                 <option>Correspondence</option>
                 <option>Analyst observation</option>
               </select>
-              <button className="button" onClick={addSyntheticEvidence}>
+              <button className="button" onClick={addDemoEvidence}>
                 Add evidence entry
               </button>
             </div>
@@ -3690,7 +3690,7 @@ function Interventions({
                     availability, latest transaction event
                   </span>
                   <span>
-                    <b>Limitations:</b> synthetic records, no live liquidity, no
+                    <b>Limitations:</b> demo records, no live liquidity, no
                     real dispatch or account action
                   </span>
                 </div>
@@ -3946,7 +3946,7 @@ function Proactive({
         )
         .filter(Boolean)
         .join(" · ") ||
-      "Synthetic multi-region";
+      "Demo multi-region";
     return {
       ...warning,
       caseIds,
@@ -3970,10 +3970,10 @@ function Proactive({
             : 66),
       explanation:
         warning.explanation ||
-        `${warning.signal} is supported by linked synthetic accounts and observed transaction records.`,
+        `${warning.signal} is supported by linked demo accounts and observed transaction records.`,
       limitations:
         warning.limitations ||
-        "Synthetic observations only; no live feeds, trained model, or identity validation.",
+        "Demo observations only; no live feeds, trained model, or identity validation.",
       recommendation:
         warning.recommendation ||
         "Review linked complaints and examine the transaction chain before deciding whether to escalate.",
@@ -4043,7 +4043,7 @@ function Proactive({
       />
       <div className="demo-banner">
         <span className="live-dot" />
-        Synthetic early-warning demonstration · deterministic seeded patterns,
+        Demo early-warning demonstration · deterministic seeded patterns,
         not real-time anomaly detection or a trained ML model.
       </div>
       <div className="warning-filters">
@@ -4276,7 +4276,7 @@ function Proactive({
                     {selected.transactions.length} transaction(s),{" "}
                     {selected.accounts.length} account(s), and{" "}
                     {selected.cases.length} complaint-linked case(s) from the
-                    synthetic dataset.
+                    demo dataset.
                   </p>
                   <strong>Limitations</strong>
                   <p>{selected.limitations}</p>
@@ -4392,7 +4392,7 @@ function AlternateExits({
   const [amount, setAmount] = useState("50000");
   const [location, setLocation] = useState("Indiranagar Metro ATM");
   const [sourceNote, setSourceNote] = useState(
-    "Synthetic observation entered by demo investigator.",
+    "Demo observation entered by demo investigator.",
   );
   const [outcome, setOutcome] = useState("");
   const [message, setMessage] = useState("");
@@ -4418,7 +4418,7 @@ function AlternateExits({
               data.complaints.find((item) => item.caseId === caseId)
                 ?.createdAt || currentCase.createdAt,
             label: "Initial complaint",
-            kind: "Observed synthetic",
+            kind: "Observed demo",
             detail:
               data.complaints.find((item) => item.caseId === caseId)
                 ?.reference || "Complaint record",
@@ -4431,7 +4431,7 @@ function AlternateExits({
         id: item.id,
         at: item.createdAt,
         label: "Known transaction event",
-        kind: "Observed synthetic",
+        kind: "Observed demo",
         detail: `${item.fromAccountId} → ${item.toAccountId} · ${money(item.amount)} · ${item.channel}`,
       })),
     ...(prediction
@@ -4449,7 +4449,7 @@ function AlternateExits({
       id: item.id,
       at: item.observedAt || item.createdAt,
       label: `New ${item.eventType || item.type} observation`,
-      kind: "Observed synthetic",
+      kind: "Observed demo",
       detail: `${item.route} · ${money(item.amount)} · ${item.location || "Location unknown"}`,
     })),
     ...(priorEvents.length
@@ -4483,7 +4483,7 @@ function AlternateExits({
         id: item.id,
         at: item.createdAt,
         label: "Recorded outcome",
-        kind: "Observed synthetic outcome",
+        kind: "Observed demo outcome",
         detail: item.result,
       })),
   ].sort((a, b) => new Date(a.at).getTime() - new Date(b.at).getTime());
@@ -4578,7 +4578,7 @@ function AlternateExits({
       />
       <div className="demo-banner">
         <span className="live-dot" />
-        Deterministic synthetic simulation · observations update local demo
+        Deterministic demo simulation · observations update local demo
         state only; no live monitoring or automatic model retraining.
       </div>
       <div className="alternate-controls">
@@ -4820,7 +4820,7 @@ function AlternateExits({
                 Cancel
               </button>
               <button className="button primary" onClick={submit}>
-                Add synthetic event
+                Add demo event
               </button>
             </div>
           </div>
@@ -4870,7 +4870,7 @@ function Network({
       from: r.sourceId,
       to: r.targetId,
       label: r.relationship,
-      kind: "synthetic relationship",
+      kind: "demo relationship",
     })),
     ...data.transactions.map((t) => ({
       from: t.fromAccountId,
@@ -4901,7 +4901,7 @@ function Network({
       <Header title="Network Intelligence" eyebrow="CONNECTED ENTITY GRAPH" />
       <div className="demo-banner">
         <span className="live-dot" />
-        Synthetic relationship graph · links are limited to recorded case,
+        Demo relationship graph · links are limited to recorded case,
         transaction, and relationship records. No live I4C or bank intelligence
         is connected.
       </div>
@@ -4912,7 +4912,7 @@ function Network({
         >
           <option>All</option>
           <option>observed transaction</option>
-          <option>synthetic relationship</option>
+          <option>demo relationship</option>
           <option>case link</option>
         </select>
         <button
@@ -4928,7 +4928,7 @@ function Network({
             className="network-graph"
             viewBox="0 0 800 650"
             role="img"
-            aria-label="Synthetic relationship graph"
+            aria-label="Demo relationship graph"
           >
             {visibleEdges.map((e, i) => {
               const a = nodes.find((n) => n.id === e.from),
@@ -5086,11 +5086,11 @@ function Strategic({
     <>
       <Header
         title="Strategic Intelligence"
-        eyebrow="AGGREGATED SYNTHETIC ANALYSIS"
+        eyebrow="AGGREGATED DEMO ANALYSIS"
       />
       <div className="demo-banner">
         <span className="live-dot" />
-        Simulated analyst view · aggregates are derived from synthetic records
+        Simulated analyst view · aggregates are derived from demo records
         and must not be treated as official I4C or bank intelligence.
       </div>
       <div className="strategic-filters">
@@ -5120,7 +5120,7 @@ function Strategic({
         <Metric
           label="Filtered cases"
           value={String(cases.length)}
-          note="Selected synthetic scope"
+          note="Selected demo scope"
           accent="blue"
         />
         <Metric
@@ -5162,7 +5162,7 @@ function Strategic({
                 <p>{data.warnings.find((w) => w.title === p)?.signal}</p>
                 <small>
                   {data.warnings.find((w) => w.title === p)?.entities} linked
-                  entities · synthetic evidence
+                  entities · demo evidence
                 </small>
               </div>
             ))}
@@ -5187,7 +5187,7 @@ function Strategic({
               pathOptions={{ color: c.riskScore >= 80 ? "#ef6d77" : "#f3aa55" }}
             >
               <Popup>
-                {c.location} · aggregated synthetic risk {c.riskScore}
+                {c.location} · aggregated demo risk {c.riskScore}
               </Popup>
             </CircleMarker>
           ))}
@@ -5202,7 +5202,7 @@ function Strategic({
               <strong>{item.name}</strong>
               <span>Aggregated risk index {item.value}</span>
               <small>
-                Contributing synthetic predicted locations · open GIS map
+                Contributing demo predicted locations · open GIS map
               </small>
             </button>
           ))}
@@ -5258,7 +5258,7 @@ function Strategic({
                 </td>
                 <td>{cases.length} filtered cases</td>
                 <td>{p.affectedDistricts} districts</td>
-                <td>{p.confidence}% synthetic confidence</td>
+                <td>{p.confidence}% demo confidence</td>
                 <td>
                   <Badge tone="green">Monitor</Badge>
                 </td>
@@ -5425,7 +5425,7 @@ function Generic({
           </h3>
           <p>
             Explore connected entities, emerging patterns, and explainable
-            synthetic signals from the shared demo data service.
+            demo signals from the shared demo data service.
           </p>
           <button className="button primary" onClick={() => setDone(true)}>
             Open analyst view
@@ -5461,7 +5461,7 @@ function AuditLog({ data }: { data: Dataset }) {
       <Header title="Activity and Audit Log" eyebrow="ACCOUNTABILITY" />
       <div className="demo-banner">
         <span className="live-dot" />
-        Synthetic audit events only · no external security or compliance system
+        Demo audit events only · no external security or compliance system
         is connected.
       </div>
       <Section title={`Audit events · ${data.audit.length}`}>
@@ -5499,16 +5499,16 @@ function Reports({ data }: { data: Dataset }) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "synthetic-intelligence-report.json";
+    link.download = "demo-intelligence-report.json";
     link.click();
     URL.revokeObjectURL(url);
   };
   return (
     <>
-      <Header title="Reports and Evidence" eyebrow="SYNTHETIC DOSSIERS" />
+      <Header title="Reports and Evidence" eyebrow="DEMO DOSSIERS" />
       <div className="demo-banner">
         <span className="live-dot" />
-        Exports contain synthetic demo records only and are not official
+        Exports contain demo records only and are not official
         evidence or live intelligence.
       </div>
       <Section title="Available report data">
@@ -5531,7 +5531,7 @@ function Reports({ data }: { data: Dataset }) {
           </div>
         </div>
         <button className="button primary" onClick={exportData}>
-          Export synthetic report JSON
+          Export demo report JSON
         </button>
       </Section>
     </>
@@ -5637,7 +5637,7 @@ function Alerts({
       />
       <div className="demo-banner">
         <span className="live-dot" />
-        Synthetic notification centre · no SMS, email, or external API requests
+        Demo notification centre · no SMS, email, or external API requests
         are sent.
       </div>
       <div className="alert-filters">
@@ -5681,7 +5681,7 @@ function Alerts({
         <Metric
           label="Inbox alerts"
           value={String(rows.length)}
-          note="Configured synthetic alerts"
+          note="Configured demo alerts"
           accent="blue"
         />
         <Metric
@@ -5757,7 +5757,7 @@ function Alerts({
                   <strong>Recommended next step</strong>
                   <p>
                     {selected.recommendedNextStep ||
-                      "Review the linked synthetic record."}
+                      "Review the linked demo record."}
                   </p>
                   <small>
                     Created {new Date(selected.createdAt).toLocaleString()} ·
@@ -5981,16 +5981,16 @@ export function App() {
     ) : page === "Settings" ? (
       <>
         <Header title={current[1]} eyebrow="DEMO CONTROLS" />
-        <Section title="Synthetic environment">
+        <Section title="Demo environment">
           <div className="settings">
             <div>
               <strong>Environment status</strong>
               <p>
-                All records are synthetic and stored in this browser only. No
+                All records are demo and stored in this browser only. No
                 backend or live data source is connected.
               </p>
             </div>
-            <Badge tone="green">Synthetic Data Demo</Badge>
+            <Badge tone="green">Demo Environment</Badge>
             <button
               className="button danger"
               onClick={() => setData(resetDemo())}
@@ -6021,7 +6021,7 @@ export function App() {
         </div>
         <div className="demo-tag">
           <span className="live-dot" />
-          SYNTHETIC DATA DEMO
+          DEMO DATA DEMO
         </div>
         <nav>
           {nav.map(([id, label, icon]) => (

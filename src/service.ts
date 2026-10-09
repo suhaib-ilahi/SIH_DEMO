@@ -20,8 +20,8 @@ export const loadData = (): Dataset => {
     if (!collections.every((key) => Array.isArray(parsed[key]))) throw new Error("Dataset collections are incomplete.");
     return parsed as Dataset;
   } catch (error) {
-    console.error("Unable to load the persisted synthetic dataset. Reset the demo to seed data.", error);
-    throw new Error("Persisted synthetic demo data is invalid. Use Reset demo data to restore the seed dataset.");
+    console.error("Unable to load the persisted demo dataset. Reset the demo to seed data.", error);
+    throw new Error("Persisted demo data is invalid. Use Reset demo data to restore the seed dataset.");
   }
 };
 const persist = (data: Dataset) =>
