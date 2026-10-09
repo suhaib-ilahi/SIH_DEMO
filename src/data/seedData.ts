@@ -1,0 +1,1 @@
+export { seedData } from '../data';
